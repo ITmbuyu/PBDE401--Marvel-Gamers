@@ -1,0 +1,71 @@
+﻿@model PBDE401.ViewModel.SubscriptionViewModel
+@using PBDE401.Utility
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h3>Add New Prescription</h3>
+    <hr />
+    @Html.HiddenFor(x => x.MedicineId)
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, "Patient Email", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Email, new { id = "email", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Name, new { id = "bookTitle", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.MedicalNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.MedicalNumber, new { id = "bookISBN", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MedicalNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @{
+        List<SelectListItem> listItem = new List<SelectListItem>();
+        listItem.Add(new SelectListItem
+        {
+            Text = "One Month",
+            Value = "1"
+        });
+        listItem.Add(new SelectListItem
+        {
+            Text = "Three Months",
+            Value = "3"
+        });
+
+    }
+    <div class="form-group">
+        @Html.LabelFor(model => model.SubscriptionDuration, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.SubscriptionDuration, listItem, new { id = "ddlRentalDuration", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SubscriptionDuration, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Prescribe" id="btnSubmit" class="btn btn-sm btn-success" />
+        </div>
+    </div>
+
+</div>
+}
+

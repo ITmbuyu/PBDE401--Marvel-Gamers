@@ -1,0 +1,237 @@
+﻿@model IPagedList<PBDE401.ViewModel.SubscriptionViewModel>
+@using PagedList
+@using PagedList.Mvc
+@using PBDE401.Utility
+@using PBDE401.Models
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm("Index", "Prescription", FormMethod.Get))
+{
+    <br />
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Prescription Portal</h3>
+            @if (User.IsInRole(SD.DoctorRole))
+            {
+                <p>
+                    @Html.Partial("_CreateButtonPartial")
+                </p>
+            }
+        </div>
+
+        <div class="col-sm-8 pull-right">
+            <div class="row">
+                <div class="col-sm-12 text-right">
+                    @if (User.IsInRole(SD.DoctorRole))
+                    {
+                        <label class="radio-inline">
+                            @Html.RadioButton("option", "fullname") Full Name
+                        </label>
+                        <label class="radio-inline">
+                            @Html.RadioButton("option", "email") Email
+                        </label>
+                    }
+                    <label class="radio-inline">
+                        @Html.RadioButton("option", "status") Status
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="pull-right">
+                    <button type="submit" name="submit" value="Search" class="btn btn-sm btn-primary">
+                        <span class="glyphicon glyphicon-search"></span> &nbsp; Search
+                    </button>
+                </div>
+                <div class="pull-right">
+                    @Html.Editor("search", new { htmlAttributes = new { @class = "form-control input-sm" } })
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <table class="table table-condensed table-hover">
+        <tr class="table-header">
+            <th></th>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(m => m.First().FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.First().Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.First().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.First().StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.First().ScheduledEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.First().SubscriptionPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.First().SubscriptionDuration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.First().Status)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.HiddenFor(m => item.UserId)
+                </td>
+                <td>
+                    @Html.HiddenFor(m => item.MedicineId)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.ScheduledEndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.SubscriptionPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.SubscriptionDuration) month(s)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Status)
+                </td>
+                <td>
+                    @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+               {
+                   Action = "Details",
+                   ButtonType = "btn-success",
+                   Glyph = "list",
+                   Text = "Details Button",
+                   MedicineId = null,
+                   CustomerId = null,
+                   CategoryId = null,
+                   MembershipTypeId = null,
+                   UserId = null,
+                   SubscriptionId = item.Id
+               })
+                </td>
+                <td>
+                    @*Action Buttons*@
+
+                    @if (item.Status.ToString().ToLower().Equals(SD.RequestedLower) && User.IsInRole(SD.DoctorRole))
+                    {
+                        //Approve and Decline Buttons
+                        @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                        {
+                           Action = "Decline",
+                           ButtonType = "btn-danger",
+                           Glyph = "remove",
+                           Text = "Decline Button",
+                           MedicineId = null,
+                           CustomerId = null,
+                           CategoryId = null,
+                           MembershipTypeId = null,
+                           UserId = null,
+                           SubscriptionId = item.Id
+                        })
+
+                        @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                        {
+                           Action = "Approve",
+                           ButtonType = "btn-primary",
+                           Glyph = "ok",
+                           Text = "Approve Button",
+                           MedicineId = null,
+                           CustomerId = null,
+                           CategoryId = null,
+                           MembershipTypeId = null,
+                           UserId = null,
+                           SubscriptionId = item.Id
+                        })
+                    }
+                    else
+                    {
+                        if ((item.Status.ToString().ToLower().Equals(SD.RequestedLower) && (User.IsInRole(SD.PatientRole))) ||
+                            (User.IsInRole(SD.DoctorRole) && !item.Status.ToString().ToLower().Equals(SD.ClosedLower)))
+                        {
+                            //Show Delete Button
+                            //If Status is Requested for patients, show them delete button
+                            //If User is doctor and status is not closed then show admin delete button
+                            @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                            {
+                               Action = "Delete",
+                               ButtonType = "btn-danger",
+                               Glyph = "trash",
+                               Text = "Delete Button",
+                               MedicineId = null,
+                               CustomerId = null,
+                               CategoryId = null,
+                               MembershipTypeId = null,
+                               UserId = null,
+                               SubscriptionId = item.Id
+                            })
+                        }
+
+                        if (item.Status.ToString().ToLower().Equals(SD.PrescribedLower) && User.IsInRole(SD.DoctorRole))
+                        {
+                            //Display PickUp Button
+                            @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                       {
+                           Action = "PickUp",
+                           ButtonType = "btn-primary",
+                           Glyph = "share-alt",
+                           Text = "PickUp Button",
+                           MedicineId = null,
+                           CustomerId = null,
+                           CategoryId = null,
+                           MembershipTypeId = null,
+                           UserId = null,
+                           SubscriptionId = item.Id
+                       })
+                        }
+                        else
+                        {
+                            if (item.Status.ToString().ToLower().Equals(SD.PickedUpLower) && User.IsInRole(SD.DoctorRole))
+                            {
+                                //Display Return Button
+                                @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                           {
+                               Action = "Close",
+                               ButtonType = "btn-primary",
+                               Glyph = "retweet",
+                               Text = "Return Button",
+                               MedicineId = null,
+                               CustomerId = null,
+                               CategoryId = null,
+                               MembershipTypeId = null,
+                               UserId = null,
+                               SubscriptionId = item.Id
+                           })
+                            }
+                        }
+                    }
+
+                </td>
+            </tr>
+        }
+    </table>
+
+    @Html.PagedListPager(Model, pageNumber => Url.Action("Index", new { pageNumber }))
+}

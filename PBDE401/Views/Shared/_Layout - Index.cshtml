@@ -1,4 +1,4 @@
-﻿@using PBDE401.Utility
+@using PBDE401.Utility
 <!DOCTYPE html>
 <html lang="en">
 <html lang="en">
@@ -15,6 +15,11 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <!-- ChatBot Style -->
+    <link href="~/Template/css/chatstyle.css" type="text/css" rel="stylesheet" media="all">
+    <!-- ChatBot Style -->
+
     <!-- Custom Theme files -->
     <link href="~/Template/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
     <link href="~/Template/css/style.css" type="text/css" rel="stylesheet" media="all">
@@ -31,6 +36,19 @@
     <!-- //web fonts -->
 </head>
 <body class="cbp-spmenu-push">
+
+    <!-- ChatBot HTML -->
+    <button class="open-button" onclick="openForm()">Chat to Us!</button>
+
+    <div class="chat-popup" id="myForm">
+        <form action="/action_page.php" class="chat-form-container">
+            <iframe src="https://webchat.botframework.com/embed/Canni-Bot?s=Wf50KmnCgEg._o6PN8ZV5iq94ZpGLDQB3MfXBbNoo9Hdm4LQbIkiR8o"
+                    style="height: 502px; max-height: 502px; width: 280px;"></iframe>
+
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+    </div>
+    <!-- ChatBot HTML -->
     <!-- banner -->
     <div class="banner">
         <!-- header -->
@@ -180,6 +198,10 @@
         });
     </script>
     <!-- //end-smooth-scrolling -->
+    <!-- ChatBot Js -->
+    <script src="~/Template/js/chatjs.js"></script>
+    <!-- ChatBot Js -->
+
     <script type="text/javascript" src="~/Template/js/numscroller-1.0.js"></script>
     <!-- Bootstrap core JavaScript
     ================================================== -->

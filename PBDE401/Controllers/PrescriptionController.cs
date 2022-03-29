@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using System.Net;
+using System.Net.Mail;
 
 namespace PBDE401.Controllers
 {
@@ -197,6 +198,40 @@ namespace PBDE401.Controllers
             //Email user about decision
             var userEmail = db.Users.SingleOrDefault(c => c.Id == prescription.UserId).Email;
             //email code here
+            string message =
+                $"Hi there, \n\n" +
+                $"You have made a request with GamersMed Weed . Here are the details: \n\n" +
+                $"Sorry your request for the medicine has been declined with GamersMed Weed . Here are the details: \n\n" +
+                $"Your Tracking Number is: {prescription.Status} \n" +
+                $"Your Request Number is: {medicineInDb} \n" +
+                $"reason for declining includes Age specifications, or not enough documentation for proof of Iidentification \n\n" +
+                $"Kind Regards";
+
+            // Sendemail
+            var senderEmail = new MailAddress("gamersmedweed@gmail.com", "Sharac Phone Repair Tech");
+            var recieverMail = new MailAddress(userEmail, "Client");
+            var password = "hello123@B4";
+            var sub = $"New Request #{db.Subscriptions.Find(id)}";
+            var body = message;
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                // EnableSsl = false,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(senderEmail.Address, password)
+            };
+            using (var mess = new MailMessage(senderEmail, recieverMail)
+            {
+                Subject = sub,
+                Body = body
+            })
+            {
+                smtp.Send(mess);
+            }
             //Email user about decision
 
             return RedirectToAction("Index");
@@ -212,6 +247,38 @@ namespace PBDE401.Controllers
             //Email user about decision
             var userEmail = db.Users.SingleOrDefault(c => c.Id == prescription.UserId).Email;
             //email code here
+            string message =
+                $"Hi there, \n\n" +
+                $"your request for the medicine has been aaproved with GamersMed Weed . Here are the details: \n\n" +
+                $"Your Tracking Number is: {prescription.Status} \n" +
+                $"Please proceed for pick up of your medication \n\n" +
+                $"Kind Regards";
+
+            // Sendemail
+            var senderEmail = new MailAddress("shadrachphonerepair@gmail.com", "Sharac Phone Repair Tech");
+            var recieverMail = new MailAddress(userEmail, "Client");
+            var password = "Aigdloves2Nar1";
+            var sub = $"New Request #{prescription.Id}";
+            var body = message;
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                // EnableSsl = false,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(senderEmail.Address, password)
+            };
+            using (var mess = new MailMessage(senderEmail, recieverMail)
+            {
+                Subject = sub,
+                Body = body
+            })
+            {
+                smtp.Send(mess);
+            }
             //Email user about decision
 
             return RedirectToAction("Index");
@@ -237,6 +304,39 @@ namespace PBDE401.Controllers
             //Email user about decision
             var userEmail = db.Users.SingleOrDefault(c => c.Id == prescription.UserId).Email;
             //email code here
+            string message =
+                $"Hi there, \n\n" +
+                $"You have a pickup for medication  with GamersMed Weed . Here are the details: \n\n" +
+                $"Your Prescription Status is: {prescription.Status} \n" +
+                $"reason for declining includes Age specifications, or not enough documentation for proof of Iidentification \n\n" +
+                $"Kind Regards";
+
+            // Sendemail
+            var senderEmail = new MailAddress("shadrachphonerepair@gmail.com", "Sharac Phone Repair Tech");
+            var recieverMail = new MailAddress(userEmail, "Client");
+            var password = "Aigdloves2Nar1";
+            var sub = $"New Request #{prescription.Id}";
+            var body = message;
+
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                // EnableSsl = false,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(senderEmail.Address, password)
+            };
+            using (var mess = new MailMessage(senderEmail, recieverMail)
+            {
+                Subject = sub,
+                Body = body
+            })
+            {
+                smtp.Send(mess);
+            }
             //Email user about decision
 
             return RedirectToAction("Index");
@@ -253,6 +353,38 @@ namespace PBDE401.Controllers
             //Email user about decision
             var userEmail = db.Users.SingleOrDefault(c => c.Id == prescription.UserId).Email;
             //email code here
+            string message =
+                $"Hi there, \n\n" +
+                $"This Email is thank you for dealing with GamersMed Weed . Here are the details: \n\n" +
+                $"Your Prescription Status is: {prescription.Status} \n" +
+                $"Kind Regards";
+
+            // Sendemail
+            var senderEmail = new MailAddress("shadrachphonerepair@gmail.com", "Sharac Phone Repair Tech");
+            var recieverMail = new MailAddress(userEmail, "Client");
+            var password = "Aigdloves2Nar1";
+            var sub = $"New Request #{prescription.Id}";
+            var body = message;
+
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                // EnableSsl = false,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(senderEmail.Address, password)
+            };
+            using (var mess = new MailMessage(senderEmail, recieverMail)
+            {
+                Subject = sub,
+                Body = body
+            })
+            {
+                smtp.Send(mess);
+            }
             //Email user about decision
 
             return RedirectToAction("Index");

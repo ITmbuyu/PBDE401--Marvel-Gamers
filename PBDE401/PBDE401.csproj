@@ -195,6 +195,7 @@
     <Compile Include="Controllers\MedicineDetailController.cs" />
     <Compile Include="Controllers\MembershipTypeController.cs" />
     <Compile Include="Controllers\PrescriptionController.cs" />
+    <Compile Include="Controllers\testController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Extensions\ThumbnailExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -265,6 +266,38 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Template\css\bootstrap.css" />
+    <Content Include="Template\css\chocolat.css" />
+    <Content Include="Template\css\component.css" />
+    <Content Include="Template\css\font-awesome.css" />
+    <Content Include="Template\css\style.css" />
+    <Content Include="Template\fonts\fontawesome-webfont.svg" />
+    <Content Include="Template\images\banner.jpg" />
+    <Content Include="Template\images\close.png" />
+    <Content Include="Template\images\img1.jpg" />
+    <Content Include="Template\images\img10.jpg" />
+    <Content Include="Template\images\img11.jpg" />
+    <Content Include="Template\images\img12.jpg" />
+    <Content Include="Template\images\img13.jpg" />
+    <Content Include="Template\images\img2.jpg" />
+    <Content Include="Template\images\img3.jpg" />
+    <Content Include="Template\images\img4.jpg" />
+    <Content Include="Template\images\img5.jpg" />
+    <Content Include="Template\images\img6.jpg" />
+    <Content Include="Template\images\img7.jpg" />
+    <Content Include="Template\images\img8.jpg" />
+    <Content Include="Template\images\img9.jpg" />
+    <Content Include="Template\images\left.png" />
+    <Content Include="Template\images\menu-icon.png" />
+    <Content Include="Template\images\right.png" />
+    <Content Include="Template\images\slid.jpg" />
+    <Content Include="Template\js\bootstrap.js" />
+    <Content Include="Template\js\classie.js" />
+    <Content Include="Template\js\jquery-1.11.1.min.js" />
+    <Content Include="Template\js\jquery.chocolat.js" />
+    <Content Include="Template\js\modernizr.custom.js" />
+    <Content Include="Template\js\numscroller-1.0.js" />
+    <Content Include="Template\js\responsiveslides.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -331,6 +364,20 @@
     <Content Include="Views\Prescription\Details.cshtml" />
     <Content Include="Views\Prescription\Delete.cshtml" />
     <Content Include="Views\Prescription\Create.cshtml" />
+    <Content Include="Views\Shared\_Layout - Index.cshtml" />
+    <Content Include="Template\fonts\fontawesome-webfont.eot" />
+    <Content Include="Template\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Template\fonts\fontawesome-webfont.woff" />
+    <Content Include="Template\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Template\fonts\FontAwesome.otf" />
+    <Content Include="Template\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Template\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Views\test\Create.cshtml" />
+    <Content Include="Views\test\Delete.cshtml" />
+    <Content Include="Views\test\Details.cshtml" />
+    <Content Include="Views\test\Edit.cshtml" />
+    <Content Include="Views\test\Index.cshtml" />
+    <Content Include="Views\Home\Medications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

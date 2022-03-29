@@ -30,6 +30,25 @@ namespace PBDE401.Controllers
             return View(model);
         }
 
+        public ActionResult Medications(string search = null)
+        {
+            var thumbnails = new List<ThumbnailModel>().GetMedicineThumbnail(ApplicationDbContext.Create(), search);
+            var count = thumbnails.Count() / 4;
+
+            var model = new List<ThumbnailBoxViewModel>();
+
+            for (int i = 0; i <= count; i++)
+            {
+                model.Add(new ThumbnailBoxViewModel
+                {
+                    Thumbnails = thumbnails.Skip(i * 4).Take(4)
+                });
+            }
+
+
+            return View(model);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

@@ -1,0 +1,13 @@
+﻿@model IEnumerable<PBDE401.ViewModel.ThumbnailBoxViewModel>
+@{
+    ViewBag.Title = "Medications";
+}
+
+<h2>Medications</h2>
+
+<div class="row">
+    @foreach (var area in Model)
+    {
+        @Html.Partial("_ThumbnailAreaPartial", area)
+    }
+</div>

@@ -1,5 +1,5 @@
 ﻿@model PBDE401.ViewModel.SubscriptionViewModel
-    @using PBDE401.Utility
+@using PBDE401.Utility
 
 @{
     ViewBag.Title = "Index";
@@ -12,7 +12,7 @@
     <div class="row">
         @* Medicine Image *@
         <div class="col-sm-3 col-xs-4 image-medicine">
-            <img class="thumbnail-img" src="@Model.ImageUrl" alt="" style="width:100%;height:auto;padding:10px;" />
+            <img class="thumbnail-img" src="~/Uploads/@Model.ImageUrl" alt="" style="width:100%;height:auto;padding:10px;" />
         </div>
 
 
@@ -29,113 +29,111 @@
         </div>
 
         @* Prescription Price and other Medicine Details *@
-    <div class="col-sm-3 col-xs-12 content-medicine-product-details">
-        <div>
-            @{
-                List<SelectListItem> listItem = new List<SelectListItem>();
-                listItem.Add(new SelectListItem
-                {
-                    Text = "One Month",
-                    Value = "1"
-                });
-                listItem.Add(new SelectListItem
-                {
-                    Text = "Three Months",
-                    Value = "3"
-                });
-            }
+        <div class="col-sm-3 col-xs-12 content-medicine-product-details">
+            <div>
+                @{
+                    List<SelectListItem> listItem = new List<SelectListItem>();
+                    listItem.Add(new SelectListItem
+                    {
+                        Text = "One Month",
+                        Value = "1"
+                    });
+                    listItem.Add(new SelectListItem
+                    {
+                        Text = "Three Months",
+                        Value = "3"
+                    });
+                }
 
-            <div class="form-control" style="height:230px;">
-                <div class="input-group" style="height:10px">
-                    <label>Price per month: &nbsp; </label>
-                    <label id="lblMSRP" style="font-weight:normal;">@(Model.Price.ToString("C"))</label>
+                <div class="form-control" style="height:230px;">
+                    <div class="input-group" style="height:10px">
+                        <label>Price per month: &nbsp; </label>
+                        <label id="lblMSRP" style="font-weight:normal;">@(Model.Price.ToString("C"))</label>
+                    </div>
+                    <hr />
+                    @if (User.IsInRole(SD.PatientRole))
+                    {
+                        <label>Select your prescription duration: </label><br />
+                        @Html.DropDownListFor(m => m.SubscriptionDuration, listItem, new { @class = "form-control" })
+                        <span style="font-size:12px;">Reserve quickly to secure your prescription.<br /><br /></span>
+
+                        if (Model.Quanity > 0)
+                        {
+                            <button type="submit" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;Get Prescription
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-danger" disabled="disabled">
+                                <span class="glyphicon glyphicon-thumbs-down"></span>&nbsp;Unavailable
+                            </button>
+                        }
+                    }
+                    else if (User.IsInRole(SD.DoctorRole))
+                    {
+                        if (Model.Quanity > 0)
+                        {
+                            @Html.ActionLink("Create New Subscription", "Create", "Prescription",
+                           new { id = Model.MedicineId, medicalNumber = Model.MedicalNumber, name = Model.Name }, new { @class = "btn btn-primary" });
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-danger" disabled="disabled">
+                                <span class="glyphicon glyphicon-thumbs-down"></span>&nbsp;Unavailable
+                            </button>
+                        }
+
+
+                    }
+                    else
+                    {
+
+                        <button type="submit" class="btn btn-danger" disabled="disabled">
+                            <span class="glyphicon glyphicon-level-up"></span>&nbsp;Log in to get a prescription
+                        </button>
+                    }
                 </div>
-                <hr />
-                @if (User.IsInRole(SD.PatientRole))
-                {
-                    <label>Select your prescription duration: </label><br />
-                    @Html.DropDownListFor(m => m.SubscriptionDuration, listItem, new { @class = "form-control" })
-                    <span style="font-size:12px;">Reserve quickly to secure your prescription.<br /><br /></span>
 
-                    if (Model.Quanity > 0)
-                    {
-                        <button type="submit" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;Get Prescription
-                        </button>
-                    }
-                    else
-                    {
-                        <button type="submit" class="btn btn-danger" disabled="disabled">
-                            <span class="glyphicon glyphicon-thumbs-down"></span>&nbsp;Unavailable
-                        </button>
-                    }
-                }
-                else if (User.IsInRole(SD.DoctorRole))
-                {
-                    if (Model.Quanity > 0)
-                    {
-                        @Html.ActionLink("Create New Subscription", "Create", "Prescription",
-                       new { id = Model.MedicineId, medicalNumber = Model.MedicalNumber, name = Model.Name }, new { @class = "btn btn-primary" });
-                    }
-                    else
-                    {
-                        <button type="submit" class="btn btn-danger" disabled="disabled">
-                            <span class="glyphicon glyphicon-thumbs-down"></span>&nbsp;Unavailable
-                        </button>
-                    }
-
-
-                }
-                else
-                {
-
-                    <button type="submit" class="btn btn-danger" disabled="disabled">
-                        <span class="glyphicon glyphicon-level-up"></span>&nbsp;Log in to get a prescription
-                    </button>
-                }
             </div>
 
+            <h4 class="medicine-details-heading">Product Details</h4>
+
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(m => m.MedicalNumber)
+                </dt>
+                <dd>
+                    &nbsp;&nbsp;&nbsp;&nbsp; @Html.DisplayFor(m => m.MedicalNumber)
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(m => m.Quanity)
+                </dt>
+                <dd>
+                    &nbsp;&nbsp;&nbsp;&nbsp; @Html.DisplayFor(m => m.Quanity)
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(m => m.Category)
+                </dt>
+                <dd>
+                    &nbsp;&nbsp;&nbsp;&nbsp; @Html.DisplayFor(m => m.Category.Name)
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(m => m.ExpiryDate)
+                </dt>
+                <dd>
+                    &nbsp;&nbsp;&nbsp;&nbsp; @Html.DisplayFor(m => m.ExpiryDate)
+                </dd>
+            </dl>
+
+            @Html.HiddenFor(m => m.MedicineId)
         </div>
-
-        <h4 class="medicine-details-heading">Product Details</h4>
-
-        <dl>
-            <dt>
-                @Html.DisplayNameFor(m => m.MedicalNumber)
-            </dt>
-            <dd>
-                &nbsp;&nbsp;&nbsp;&nbsp; @Html.DisplayFor(m => m.MedicalNumber)
-            </dd>
-        </dl>
-        <dl>
-            <dt>
-                @Html.DisplayNameFor(m => m.Quanity)
-            </dt>
-            <dd>
-                &nbsp;&nbsp;&nbsp;&nbsp; @Html.DisplayFor(m => m.Quanity)
-            </dd>
-        </dl>
-        <dl>
-            <dt>
-                @Html.DisplayNameFor(m => m.Category)
-            </dt>
-            <dd>
-                &nbsp;&nbsp;&nbsp;&nbsp; @Html.DisplayFor(m => m.Category.Name)
-            </dd>
-        </dl>
-        <dl>
-            <dt>
-                @Html.DisplayNameFor(m => m.ExpiryDate)
-            </dt>
-            <dd>
-                &nbsp;&nbsp;&nbsp;&nbsp; @Html.DisplayFor(m => m.ExpiryDate)
-            </dd>
-        </dl>
-
-        @Html.HiddenFor(m => m.MedicineId)
-    </div>
 
     </div>
 }
-
-

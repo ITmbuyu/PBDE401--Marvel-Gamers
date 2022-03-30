@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace PBDE401.Models
         public string FirstName { get; set; }
         public string Surname { get; set; }
         public string Phone { get; set; }
+        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
         public bool Disable { get; set; }
         public int MembershipTypeId { get; set; }

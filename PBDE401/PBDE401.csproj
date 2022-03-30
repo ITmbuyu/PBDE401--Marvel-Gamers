@@ -53,6 +53,12 @@
     <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="PayFast, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayFast.1.0.5\lib\net462\PayFast.dll</HintPath>
+    </Reference>
+    <Reference Include="PayFast.AspNet, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayFast.AspNet.1.0.5\lib\net46\PayFast.AspNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -194,6 +200,7 @@
     <Compile Include="Controllers\MedicineController.cs" />
     <Compile Include="Controllers\MedicineDetailController.cs" />
     <Compile Include="Controllers\MembershipTypeController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\PrescriptionController.cs" />
     <Compile Include="Controllers\testController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -220,6 +227,10 @@
     <Compile Include="Migrations\202203232051044_AddSubcriptionToDb.cs" />
     <Compile Include="Migrations\202203232051044_AddSubcriptionToDb.designer.cs">
       <DependentUpon>202203232051044_AddSubcriptionToDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203292214555_RemoveRequired.cs" />
+    <Compile Include="Migrations\202203292214555_RemoveRequired.designer.cs">
+      <DependentUpon>202203292214555_RemoveRequired.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -378,9 +389,11 @@
     <Content Include="Views\test\Edit.cshtml" />
     <Content Include="Views\test\Index.cshtml" />
     <Content Include="Views\Home\Medications.cshtml" />
+    <Content Include="Views\Payment\Return.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -410,6 +423,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202203232051044_AddSubcriptionToDb.resx">
       <DependentUpon>202203232051044_AddSubcriptionToDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203292214555_RemoveRequired.resx">
+      <DependentUpon>202203292214555_RemoveRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

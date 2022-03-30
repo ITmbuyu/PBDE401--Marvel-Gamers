@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -62,7 +63,7 @@ namespace PBDE401.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(MedicineViewModel medicineVM)
+        public ActionResult Create(MedicineViewModel medicineVM, HttpPostedFileBase file)
         {
             var medicine = new Medicine
             {
@@ -72,7 +73,7 @@ namespace PBDE401.Controllers
                 Description = medicineVM.Medicine.Description,
                 Category = medicineVM.Medicine.Category,
                 CategoryId = medicineVM.Medicine.CategoryId,
-                ImageUrl = medicineVM.Medicine.ImageUrl,
+                ImageUrl = "Placeholder",
                 MedicalNumber = medicineVM.Medicine.MedicalNumber,
                 Price = medicineVM.Medicine.Price,
                 ExpiryDate = medicineVM.Medicine.ExpiryDate,
@@ -82,6 +83,33 @@ namespace PBDE401.Controllers
             {
                 db.Medicine.Add(medicine);
                 db.SaveChanges();
+
+                var uploadsDir = new DirectoryInfo(string.Format("{0}Uploads", Server.MapPath(@"\")));
+
+                if (file != null && file.ContentLength > 0)
+                {
+                    string ext = file.ContentType.ToLower();
+
+                    if (ext != "image/jpg" &&
+                        ext != "image/jpeg" &&
+                        ext != "image/pjpeg" &&
+                        ext != "image/gif" &&
+                        ext != "image/x-png" &&
+                        ext != "image/png")
+                    {
+                        ModelState.AddModelError("", "The image was not uploaded - wrong image extension.");
+                        return View("Index", medicineVM);
+                    }
+
+                    string imageName = medicine.Id + ".jpg";
+                    var path = string.Format("{0}\\{1}", uploadsDir, imageName);
+                    file.SaveAs(path);
+                }
+
+                Medicine med = db.Medicine.Find(medicine.Id);
+                med.ImageUrl = med.Id + ".jpg";
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -116,7 +144,7 @@ namespace PBDE401.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit(MedicineViewModel medicineVM)
+        public ActionResult Edit(MedicineViewModel medicineVM, HttpPostedFileBase file)
         {
             var medicine = new Medicine
             {
@@ -127,7 +155,7 @@ namespace PBDE401.Controllers
                 Description = medicineVM.Medicine.Description,
                 Category = medicineVM.Medicine.Category,
                 CategoryId = medicineVM.Medicine.CategoryId,
-                ImageUrl = medicineVM.Medicine.ImageUrl,
+                ImageUrl = "Placeholder",
                 MedicalNumber = medicineVM.Medicine.MedicalNumber,
                 Price = medicineVM.Medicine.Price,
                 ExpiryDate = medicineVM.Medicine.ExpiryDate,
@@ -136,6 +164,28 @@ namespace PBDE401.Controllers
 
             if (ModelState.IsValid)
             {
+                var uploadsDir = new DirectoryInfo(string.Format("{0}Uploads", Server.MapPath(@"\")));
+                if (file != null && file.ContentLength > 0)
+                {
+                    string ext = file.ContentType.ToLower();
+
+                    if (ext != "image/jpg" &&
+                        ext != "image/jpeg" &&
+                        ext != "image/pjpeg" &&
+                        ext != "image/gif" &&
+                        ext != "image/x-png" &&
+                        ext != "image/png")
+                    {
+                        ModelState.AddModelError("", "The image was not uploaded - wrong image extension.");
+                        return View("Index", medicineVM);
+                    }
+
+                    string imageName = medicine.Id + ".jpg";
+                    var path = string.Format("{0}\\{1}", uploadsDir, imageName);
+                    file.SaveAs(path);
+                }
+
+                medicine.ImageUrl = medicine.Id + ".jpg";
                 db.Entry(medicine).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

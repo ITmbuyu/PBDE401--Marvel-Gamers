@@ -102,7 +102,7 @@ namespace PBDE401.Models
         [Required]
         [Display(Name = "Birth Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM dd yyyy}")]
+        
 
         public DateTime BirthDate { get; set; }
     }

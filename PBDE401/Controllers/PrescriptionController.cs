@@ -211,7 +211,7 @@ namespace PBDE401.Controllers
             var senderEmail = new MailAddress("gamersmedweed@gmail.com", "Sharac Phone Repair Tech");
             var recieverMail = new MailAddress(userEmail, "Client");
             var password = "hello123@B4";
-            var sub = $"New Request #{db.Subscriptions.Find(id)}";
+            var sub = $"New Request #{id}";
             var body = message;
 
             var smtp = new SmtpClient
@@ -255,10 +255,10 @@ namespace PBDE401.Controllers
                 $"Kind Regards";
 
             // Sendemail
-            var senderEmail = new MailAddress("shadrachphonerepair@gmail.com", "Sharac Phone Repair Tech");
+            var senderEmail = new MailAddress("gamersmedweed@gmail.com", "GamersMed Pharmacy");
             var recieverMail = new MailAddress(userEmail, "Client");
-            var password = "Aigdloves2Nar1";
-            var sub = $"New Request #{prescription.Id}";
+            var password = "hello123@B4";
+            var sub = $"New Request #{id}";
             var body = message;
 
             var smtp = new SmtpClient
@@ -312,10 +312,10 @@ namespace PBDE401.Controllers
                 $"Kind Regards";
 
             // Sendemail
-            var senderEmail = new MailAddress("shadrachphonerepair@gmail.com", "Sharac Phone Repair Tech");
+            var senderEmail = new MailAddress("gamersmedweed@gmail.com", "GamersMed Pharmacy");
             var recieverMail = new MailAddress(userEmail, "Client");
-            var password = "Aigdloves2Nar1";
-            var sub = $"New Request #{prescription.Id}";
+            var password = "hello123@B4";
+            var sub = $"New Request #{id}";
             var body = message;
 
 
@@ -339,7 +339,7 @@ namespace PBDE401.Controllers
             }
             //Email user about decision
 
-            return RedirectToAction("Index");
+            return RedirectToAction("OnceOff", "Payment", new { id = id });
         }
 
         //Close Method
@@ -360,10 +360,10 @@ namespace PBDE401.Controllers
                 $"Kind Regards";
 
             // Sendemail
-            var senderEmail = new MailAddress("shadrachphonerepair@gmail.com", "Sharac Phone Repair Tech");
+            var senderEmail = new MailAddress("gamersmedweed@gmail.com", "GamersMed Pharmacy");
             var recieverMail = new MailAddress(userEmail, "Client");
-            var password = "Aigdloves2Nar1";
-            var sub = $"New Request #{prescription.Id}";
+            var password = "hello123@B4";
+            var sub = $"New Request #{id}";
             var body = message;
 
 

@@ -12,7 +12,7 @@
 <table class="table table-condensed table-hover">
     <tr class="table-header">
         <th>
-            
+
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Category.Name)
@@ -40,7 +40,7 @@
     {
         <tr>
             <td>
-                <img width="80" height="80" src="~/Content/Images/pills.jpg" />
+                <img width="80" height="80" src="~/Uploads/@(item.ImageUrl)" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Category.Name)
@@ -51,7 +51,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            
+
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>

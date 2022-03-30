@@ -24,7 +24,7 @@ namespace PBDE401.Models
         [Required]
         public string Description { get; set; }
 
-        [Required]
+        
         [DataType(DataType.ImageUrl)]
         public string ImageUrl { get; set; }
 

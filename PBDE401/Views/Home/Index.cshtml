@@ -41,7 +41,7 @@
 <!-- banner-bottom -->
 <div class="banner-bottom" id="banner-bottom">
     <div class="container">
-        <h3 class="w3l-title">What is Medi Plus</h3>
+        <h3 class="w3l-title">What is GamersMed Pharmacy</h3>
         <p class="title">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
         <div class="bottom-grids">
             <div class="col-md-4 bttm-grids-info">
@@ -148,29 +148,3 @@
     </div>
 </div>
 
-<!-- //services -->
-@*@using (Html.BeginForm("Index", "Home", FormMethod.Get))
-    {
-
-        <br />
-        <div class="row">
-            <div class="pull-right" style="padding-right:15px;">
-                <button type="submit" value="Search" class="btn btn-sm btn-primary">
-                    <span class="glyphicon glyphicon-search"></span>Search
-                </button>
-            </div>
-
-            <div class="pull-right">
-                @Html.Editor("search", new { htmlAttributes = new { @class = "form-control input-sm" } })
-            </div>
-
-        </div>
-
-        <br />
-    }
-    <div class="row">
-        @foreach (var area in Model)
-        {
-            @Html.Partial("_ThumbnailAreaPartial", area)
-        }
-    </div>*@

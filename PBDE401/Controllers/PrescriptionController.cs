@@ -202,7 +202,7 @@ namespace PBDE401.Controllers
                 $"Hi there, \n\n" +
                 $"You have made a request with GamersMed Weed . Here are the details: \n\n" +
                 $"Sorry your request for the medicine has been declined with GamersMed Weed . Here are the details: \n\n" +
-                $"Your Tracking Number is: {prescription.Status} \n" +
+                $"Your Prescription Status is: {prescription.Status} \n" +
                 $"Your Request Number is: {medicineInDb} \n" +
                 $"reason for declining includes Age specifications, or not enough documentation for proof of Iidentification \n\n" +
                 $"Kind Regards";
@@ -250,7 +250,7 @@ namespace PBDE401.Controllers
             string message =
                 $"Hi there, \n\n" +
                 $"your request for the medicine has been aaproved with GamersMed Weed . Here are the details: \n\n" +
-                $"Your Tracking Number is: {prescription.Status} \n" +
+                $"Your Prescription Status is: {prescription.Status} \n" +
                 $"Please proceed for pick up of your medication \n\n" +
                 $"Kind Regards";
 
@@ -308,7 +308,7 @@ namespace PBDE401.Controllers
                 $"Hi there, \n\n" +
                 $"You have a pickup for medication  with GamersMed Weed . Here are the details: \n\n" +
                 $"Your Prescription Status is: {prescription.Status} \n" +
-                $"reason for declining includes Age specifications, or not enough documentation for proof of Iidentification \n\n" +
+                $"Please come and pick up your medication \n\n" +
                 $"Kind Regards";
 
             // Sendemail
